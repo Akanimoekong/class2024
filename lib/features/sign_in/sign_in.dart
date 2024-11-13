@@ -1,3 +1,6 @@
+import 'package:class2024/components/name_container.dart';
+import 'package:class2024/main.dart';
+import 'package:class2024/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,33 +38,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: size.width,
                   height: size.height / 24,
                 ),
-                Align(alignment: Alignment.topLeft, child: Text('Email')),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Email',
+                      style: lightTheme.textTheme.bodyMedium,
+                    )),
                 SizedBox(
                   width: size.width,
                   height: size.height / 72,
                 ),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
-                    fillColor: Colors.grey.shade200,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                  ),
                 ),
                 SizedBox(
                   width: size.width,
@@ -74,41 +62,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 TextField(
                   controller: passwordController,
-                  decoration: InputDecoration(
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (!tapped) {
-                            tapped = true;
-                          } else {
-                            tapped = false;
-                          }
-                        });
-                        print('Eye was tapped');
-                      },
-                      child: tapped == true
-                          ? Icon(Icons.remove_red_eye_rounded)
-                          : Icon(Icons.remove_red_eye_outlined),
-                    ),
-                    fillColor: Colors.grey.shade200,
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                  ),
                 ),
                 SizedBox(
                   width: size.width,
@@ -123,9 +76,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16))),
                     onPressed: () {
-                      setState(() {
-                        
-                      });
+                      // Navigator.pushNamed(context, AppRoutes.order);
+                      // setState(() {});
                     },
                     child: Text(
                       'LOG IN',
@@ -133,14 +85,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                emailController.text == ''
-                    ? const SizedBox.shrink()
-                    : Column(
-                        children: [
-                          Text(emailController.text),
-                          Text(passwordController.text),
-                        ],
-                      )
+                SizedBox(
+                  width: size.width,
+                  height: size.height / 40,
+                ),
+                NameContainer(
+                    imageUrl: 'https://dummyimage.com/750x550/996633/fff',
+                    nameOfStudent: 'Henry'),
+                NameContainer(
+                    imageUrl: 'https://dummyimage.com/550x350/3399ff/000',
+                    nameOfStudent: 'Kalu')
               ],
             ),
           ),

@@ -2,7 +2,19 @@
 class Assets {
   Assets._();
 
+  static const String assetsAfang = 'assets/afang.jpg';
   static const String assetsAppIcon = 'assets/app_icon.svg';
   static const String assetsAppIconWhite = 'assets/app_icon_white.svg';
+  static const String imagesAfang = 'assets/images/afang.jpg';
+  static const String imagesAtama = 'assets/images/atama.jpg';
+  static const String imagesBeans = 'assets/images/beans.jpg';
+  static const String imagesEditan = 'assets/images/editan.jpg';
+  static const String imagesFood1 = 'assets/images/food1.jpg';
+  static const String imagesFood2 = 'assets/images/food2.jpg';
+  static const String imagesFood3 = 'assets/images/food3.jpg';
+  static const String imagesMelon = 'assets/images/melon.jpg';
+  static const String imagesNewImage = 'images/new_image.png';
+  static const String imagesOkro = 'assets/images/okro.jpg';
+  static const String imagesVegetable = 'assets/images/vegetable.jpg';
 
 }
