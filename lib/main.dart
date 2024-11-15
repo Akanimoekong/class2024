@@ -87,6 +87,7 @@ import 'package:class2024/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'network/api_client.dart';
+import 'network/models/baseresponse.dart';
 
 void main() {
   runApp(const NewApp());
@@ -113,6 +114,10 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
 
+  String title = '';
+  String bookTitle = 'Here it is ';
+
+  List<BookResponse> booklist = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -125,31 +130,17 @@ class _FirstScreenState extends State<FirstScreen> {
     final weatherService = WeatherService();
 
     try {
-      // Port Harcourt coordinates
       final weatherData = await weatherService.getWeatherData(
-        latitude: 4.6423,
-        longitude: 7.9244,
+        authorName: 'Stephen King',
+        apiKey: '9GU9jRkaBZznhtwUAEqYvakebWVSfGAg'
       );
-      log(weatherData.toString());
-      // // Get current weather
-      // final currentWeather = weatherService.parseCurrentWeather(weatherData);
-      // print('Current Weather:');
-      // print('Temperature: ${currentWeather['temperature']}');
-      // print('Rain: ${currentWeather['rain']}');
-      // print('Is Day: ${currentWeather['isDay']}');
-      // print('Pressure MSL: ${currentWeather['pressureMsl']}');
-      // print('Surface Pressure: ${currentWeather['surfacePressure']}');
-      //
-      // // Get hourly forecast
-      // print('\nHourly Forecast:');
-      // final hourlyForecasts = weatherService.parseHourlyForecast(weatherData);
-      // for (final forecast in hourlyForecasts) {
-      //   print('\nTime: ${forecast['time']}');
-      //   print('Temperature: ${forecast['temperature']}');
-      //   print('Rain: ${forecast['rain']}');
-      //   print('Showers: ${forecast['showers']}');
-      //   print('Sunshine Duration: ${forecast['sunshine']}');
-      // }
+      setState(() {
+        title = weatherData.results[2].book_title;
+        booklist =weatherData.results;
+      });
+      log(weatherData.copyright);
+      log(weatherData.results[2].book_title);
+
     } catch (e) {
       print('Error: $e');
     }
@@ -158,38 +149,26 @@ class _FirstScreenState extends State<FirstScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-
-            showModalBottomSheet(context: context, builder: (context){
-              return Container(child: Center(child: Text('This is the Bottom Modal'),),);
-            });
-            /*
-            User result = await Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SecondScreen()));
-
-            if (result != null) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Here is the Result:  ${result.firstName}\n'
-                          '${result.lastName}\n'
-                          '${result.schoolName}\n'
-                          '${result.dept}\n'),
-                    );
-                  });
-            }*/
-
-
-
-          },
-          child: Text(
-            'Go to SecondScreen',
-            style: lightTheme.textTheme.bodyMedium,
-          ),
-        ),
+      body: Column(
+        children: [
+          Text('$bookTitle $title'),
+          Expanded(
+            child: ListView.builder(
+                itemCount: booklist.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index){
+              return Container(
+                margin: EdgeInsets.all(8),
+                decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(12)),
+                
+                child: Column(children: [
+                  Text('${booklist[index].book_author}'),
+                  Text('${booklist[index].book_title}'),
+                ],),
+              );
+            }),
+          )
+        ],
       ),
     ));
   }
